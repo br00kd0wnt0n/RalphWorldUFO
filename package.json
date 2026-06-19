@@ -1,0 +1,12 @@
+{
+  "name": "ralph-world-ufo",
+  "version": "1.0.0",
+  "private": true,
+  "description": "Ralph World — explore a tiny cartoon planet piloting a UFO (WebGL / Three.js)",
+  "scripts": {
+    "start": "node server.js"
+  },
+  "engines": {
+    "node": ">=18"
+  }
+}

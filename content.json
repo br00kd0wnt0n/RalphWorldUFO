@@ -1,0 +1,213 @@
+{
+  "_note": "Generated from the live CMS via build-content.sh. Re-run that to refresh.",
+  "site": "https://ralph-world-production.up.railway.app",
+  "hlsUrl": "https://relay-production-8ff1.up.railway.app/hls/stream.m3u8",
+  "theatre": {
+    "zone": "tv",
+    "title": "ralph one — live transmission",
+    "blurb": "the always-on ralph.world broadcast. fly up, hover, and tune in.",
+    "url": "https://ralph-world-production.up.railway.app/tv"
+  },
+  "items": [
+    {
+      "zone": "tv",
+      "type": "article",
+      "title": "SOUNDS OF THE CITY",
+      "image": "https://pub-41076c31b4cf4ac6a9836e0a41c562e2.r2.dev/articles/1781733357987-bb425e06-1edd-4c24-b055-6f69de8c2858-soundsofthecitytile.jpg",
+      "excerpt": "What made the post-Strokes New York music scene feel like living in a brave new world?",
+      "url": "https://ralph-world-production.up.railway.app/magazine/sounds-of-the-city"
+    },
+    {
+      "zone": "mag",
+      "type": "article",
+      "title": "FEAR AND SELF-LOATHING IN LAS VEGAS",
+      "image": "https://pub-41076c31b4cf4ac6a9836e0a41c562e2.r2.dev/articles/1781732613308-b506893b-f89a-41eb-8b0e-75c840da1931-tilepic.jpg",
+      "excerpt": "The high highs and low lows living as Alan Garner in Sin City",
+      "url": "https://ralph-world-production.up.railway.app/magazine/fear-and-self-loathing-in-las-vegas"
+    },
+    {
+      "zone": "tv",
+      "type": "article",
+      "title": "FEKKY'S FARM FAM",
+      "image": "https://pub-41076c31b4cf4ac6a9836e0a41c562e2.r2.dev/articles/1781736112373-9d3597e6-c6f8-4d7a-bf7a-c365f947a383-ralph05-fekky-page-2-image-0002.jpg",
+      "excerpt": "One rapper’s journey from stage to stable",
+      "url": "https://ralph-world-production.up.railway.app/magazine/fekky-s-farm-fam"
+    },
+    {
+      "zone": "mag",
+      "type": "article",
+      "title": "MACLEOD 9",
+      "image": "https://pub-41076c31b4cf4ac6a9836e0a41c562e2.r2.dev/articles/1781723954764-ff5bb923-7257-4da4-96de-f6299ee270d3-tattymacleod-page-3-image-0002.jpg",
+      "excerpt": "Tatty Macleod is the pink-haired comedian taking Europe by storm",
+      "url": "https://ralph-world-production.up.railway.app/magazine/macleod-9"
+    },
+    {
+      "zone": "tv",
+      "type": "article",
+      "title": "GIVING MOTHER",
+      "image": "https://pub-41076c31b4cf4ac6a9836e0a41c562e2.r2.dev/articles/1781650708779-9158a426-a841-4b4e-bd00-a732a0b6eb63-leadimage.jpg",
+      "excerpt": "Superstar comedian Janine Harouni talks to our Comedy Editor about the perils of parenting, back-of-head Batman acting, and being labelled ‘too slick’.",
+      "url": "https://ralph-world-production.up.railway.app/magazine/giving-mother"
+    },
+    {
+      "zone": "mag",
+      "type": "article",
+      "title": "GIRL IN THE YEAR ABOVE",
+      "image": "https://pub-41076c31b4cf4ac6a9836e0a41c562e2.r2.dev/articles/1781729603744-1f35be3d-ba3f-4610-bb2c-b3d4dac8e5a8-gitya-page-2-image-0002.jpg",
+      "excerpt": "Every once in a while a band goes from doing a few gigs to WHOA! MASSIVE TOUR EVERYONE LOVES THEM. You can feel the energy gathering behind them. Girl In The Year Above is one of those bands",
+      "url": "https://ralph-world-production.up.railway.app/magazine/girl-in-the-year-above"
+    },
+    {
+      "zone": "tv",
+      "type": "article",
+      "title": "ALL THE INFORMATION IS ON THE TASK",
+      "image": "https://pub-41076c31b4cf4ac6a9836e0a41c562e2.r2.dev/articles/1781650010381-6415f4d4-47a7-4cde-8e99-ec9dd9cab036-ralph06-taskmaster-page-8-image-0002.jpg",
+      "excerpt": "One of the UK’s most loved TV couples talk comedy, diversity and idiocy.",
+      "url": "https://ralph-world-production.up.railway.app/magazine/all-the-information-is-on-the-task"
+    },
+    {
+      "zone": "mag",
+      "type": "article",
+      "title": "JAMALI WANTS TO BE SILLY",
+      "image": "https://pub-41076c31b4cf4ac6a9836e0a41c562e2.r2.dev/articles/1781720671149-40d24275-c379-4546-9167-87821666db82-jamalimaddix-page-4-image-0001.jpg",
+      "excerpt": "The coolest comedian on the circuit, Jamali Maddix, talks stand-up, making documentaries and how he doesn’t let death threats get to him.",
+      "url": "https://ralph-world-production.up.railway.app/magazine/jamali-wants-to-be-silly"
+    },
+    {
+      "zone": "tv",
+      "type": "article",
+      "title": "BOB THE EVERYTHING",
+      "image": "https://pub-41076c31b4cf4ac6a9836e0a41c562e2.r2.dev/articles/1781707834092-68b32999-57c2-48c6-9992-86e7d9414ec1-bobleadimage.png",
+      "excerpt": "There are many, many layers to Bob the Drag Queen",
+      "url": "https://ralph-world-production.up.railway.app/magazine/bob-the-everything"
+    },
+    {
+      "zone": "mag",
+      "type": "article",
+      "title": "HARRIET KEMSLEY WILL NEVER DIVORCE A COMEDIAN AGAIN",
+      "image": "https://pub-41076c31b4cf4ac6a9836e0a41c562e2.r2.dev/articles/1781705299428-f6b98f1f-cb9c-4c2a-8aae-9443131173ec-ralph05-harrietkemsley-page-1-image-0001.jpg",
+      "excerpt": "Our Comedy Editor talks dating, jokes in bed, and trying not to laugh in front of Bob Mortimer with the soon-to-be national treasure",
+      "url": "https://ralph-world-production.up.railway.app/magazine/harriet-kemsley-will-never-divorce-a-comedian-again"
+    },
+    {
+      "zone": "mag",
+      "type": "magazine",
+      "title": "Ralph Mag #8",
+      "image": null,
+      "excerpt": "Issue 8 — out now from the ralph.world press.",
+      "url": "https://ralph-world-production.up.railway.app/magazine"
+    },
+    {
+      "zone": "events",
+      "type": "event",
+      "title": "Film Friday Festival",
+      "image": "",
+      "excerpt": "Three nights of the weirdest short films we could find, projected onto the side of a warehouse.",
+      "url": "https://ralph-world-production.up.railway.app/events/film-friday-festival"
+    },
+    {
+      "zone": "events",
+      "type": "event",
+      "title": "Ralph Live: Summer Party",
+      "image": "",
+      "excerpt": "Music, food, weird TV and good vibes in a Peckham car park.",
+      "url": "https://ralph-world-production.up.railway.app/events/ralph-live-summer"
+    },
+    {
+      "zone": "events",
+      "type": "event",
+      "title": "Comedy In The Round",
+      "image": null,
+      "excerpt": "Five comedians. One circle. No microphones. Pure chaos, exactly the way we like it.",
+      "url": "https://ralph-world-production.up.railway.app/events/comedy-in-the-round"
+    },
+    {
+      "zone": "events",
+      "type": "event",
+      "title": "Ralph Night Market",
+      "image": "",
+      "excerpt": "Street food, synth sets and too much neon. A midnight market under the railway arches.",
+      "url": "https://ralph-world-production.up.railway.app/events/ralph-night-market"
+    },
+    {
+      "zone": "events",
+      "type": "event",
+      "title": "Ralph Launch Party",
+      "image": null,
+      "excerpt": "The night Ralph.World came online. DJs, too much food, and a cake shaped like a pixel.",
+      "url": "https://ralph-world-production.up.railway.app/events/ralph-launch-party-2025"
+    },
+    {
+      "zone": "events",
+      "type": "event",
+      "title": "Ralph Zine Fair 2025",
+      "image": null,
+      "excerpt": "Thirty makers, one long table, no wifi. Everyone left with three zines they didn't know they needed.",
+      "url": "https://ralph-world-production.up.railway.app/events/zine-fair-2025"
+    },
+    {
+      "zone": "lab",
+      "type": "lab",
+      "title": "VOICES",
+      "image": "https://pub-41076c31b4cf4ac6a9836e0a41c562e2.r2.dev/lab/1776287290133-f32b3598-ff25-463a-beca-36f9e2aa7a9d-screenshot-2026-04-15-at-5-07-50-pm.png",
+      "excerpt": "You're spending $$$ on creative\nyour audience hasn't seen yet.\n\nTest any concept against AI-powered audience panels in 60 seconds. Real reactions. Before the real spend.",
+      "url": "https://ralphvoices.up.railway.app/"
+    },
+    {
+      "zone": "lab",
+      "type": "lab",
+      "title": "Signals (Brand Scan Tool)",
+      "image": "https://pub-41076c31b4cf4ac6a9836e0a41c562e2.r2.dev/lab/1776287169505-fe5e3c5c-bb38-41c2-9f74-a523450b574d-screenshot-2026-04-15-at-5-06-01-pm.png",
+      "excerpt": "coming soon",
+      "url": "https://ralphbrandsignals-production.up.railway.app/"
+    },
+    {
+      "zone": "lab",
+      "type": "lab",
+      "title": "BD-1 WAVELENGTH - Collaborative Visual Synth",
+      "image": "https://pub-41076c31b4cf4ac6a9836e0a41c562e2.r2.dev/lab/1776287627594-e4c0c5a4-8fc9-48d2-8b34-cfae5d8c5fe9-screenshot-2026-04-15-at-5-13-00-pm.png",
+      "excerpt": "coming soon",
+      "url": "https://bd1.up.railway.app/"
+    },
+    {
+      "zone": "lab",
+      "type": "lab",
+      "title": "FREQUENCY",
+      "image": "https://pub-41076c31b4cf4ac6a9836e0a41c562e2.r2.dev/lab/1776286947615-71159fd5-6430-4059-b3f7-a3a0dc34efa2-screenshot-2026-04-15-at-5-02-16-pm.png",
+      "excerpt": "AI-Powered Interactive Radio Narrative\n\nA new format for interactive storytelling where players explore narratives through a simulated radio interface - scanning frequencies, decoding signals, and bui",
+      "url": "https://frequencyclient.up.railway.app/"
+    },
+    {
+      "zone": "lab",
+      "type": "lab",
+      "title": "3D SANDBOX",
+      "image": "https://pub-41076c31b4cf4ac6a9836e0a41c562e2.r2.dev/lab/1776287097635-24230384-82d6-4362-9fd0-5479086ead6b-screenshot-2026-04-15-at-5-04-49-pm.png",
+      "excerpt": "Coming soon",
+      "url": "https://ralph3dsandbox.up.railway.app/?scene=eyJza3kiOiIjMzkwMDgwIiwiZm9nQyI6IiMyZjAwZmYiLCJmb2dEIjowLjAzOCwiZmxvb3JNIjoiY2hlY2tlciIsImZsb29yQyI6IiMwZDA4MjAiLCJhbWJJIjowLjMsImFtYkMiOiIjZTRlMGU1IiwicHRJIjozLjcsInB0QyI6IiMwOGRkZGEiLCJuYW1lIjoiUEVOSVMgT0YgQ0hSSVNUIiwiY2FtTW9kZSI6Im9yYml0Iiwib2JqZWN0cyI6W3sidHlwZSI6ImJveCIsInBvcyI6eyJ4IjotMiwieSI6MC40OTcsInoiOjB9LCJyb3QiOnsieCI6MCwieSI6ODcuMjI2LCJ6IjowfSwic2NsIjp7IngiOjEsInkiOjEsInoiOjF9LCJhbmltYXRlIjp0cnVlLCJjb2xvciI6IiM0ZGZmZjMifSx7InR5cGUiOiJzcGhlcmUiLCJwb3MiOnsieCI6MCwieSI6MC44NDcsInoiOjB9LCJyb3QiOnsieCI6MCwieSI6ODcuODgzNCwieiI6MH0sInNjbCI6eyJ4IjoxLCJ5IjoxLCJ6IjoxfSwiYW5pbWF0ZSI6dHJ1ZSwiY29sb3IiOiIjZThmZjQ3In0seyJ0eXBlIjoidG9ydXMiLCJwb3MiOnsieCI6Mi4yLCJ5IjowLjc0OCwieiI6MH0sInJvdCI6eyJ4IjowLCJ5Ijo4Ny45MDA5LCJ6IjowfSwic2NsIjp7IngiOjEsInkiOjEsInoiOjF9LCJhbmltYXRlIjp0cnVlLCJjb2xvciI6IiNmZjRkOGYifSx7InR5cGUiOiJ0ZXh0dXJlIiwicG9zIjp7IngiOi0zLjEwNywieSI6MS4yLCJ6IjotMi4yNjh9LCJyb3QiOnsieCI6MCwieSI6MC42NjMyLCJ6IjowfSwic2NsIjp7IngiOjEuMSwieSI6MS4xLCJ6IjoxLjF9LCJhbmltYXRlIjp0cnVlLCJjb2xvciI6IiNmZmZmZmYiLCJhc3NldFVybCI6Ii91cGxvYWRzLzE3NzE2MDU2MTk5NzQtNGZlMzk4NDZiMWI4LnBuZyJ9LHsidHlwZSI6ImdsYiIsInBvcyI6eyJ4IjoyLjg1MywieSI6MC4wOTMsInoiOi0yLjkxfSwicm90Ijp7IngiOjAsInkiOjUuMTMxMywieiI6MH0sInNjbCI6eyJ4Ijo0LCJ5Ijo0LCJ6Ijo0fSwiYW5pbWF0ZSI6ZmFsc2UsImFzc2V0VXJsIjoiL3VwbG9hZHMvMTc3MTYwNTYzMDMyNC1hNTJjMDBkZTE5MWIuZ2xiIn1dfQ=="
+    },
+    {
+      "zone": "lab",
+      "type": "lab",
+      "title": "Case Study Viewer",
+      "image": "https://pub-41076c31b4cf4ac6a9836e0a41c562e2.r2.dev/lab/1776287241376-852ae6e4-e1bd-48bd-86fe-10929fea26bf-screenshot-2026-04-15-at-5-06-53-pm.png",
+      "excerpt": "coming soon",
+      "url": "https://ralphcasestudyviewer-production.up.railway.app/care-bears-ralph"
+    },
+    {
+      "zone": "lab",
+      "type": "lab",
+      "title": "Honest Ads (Mobile second screen experience. )",
+      "image": "https://pub-41076c31b4cf4ac6a9836e0a41c562e2.r2.dev/lab/1776287533946-21653f44-b817-4dfe-a272-40dc55c73264-screenshot-2026-04-15-at-5-11-43-pm.png",
+      "excerpt": "THE TRUTH BEHIND THE HYPE\n\nPoint your camera at any TV ad.\nWe'll tell you what they're really selling.\n\nENTER THE TRUTH MACHINE",
+      "url": "https://ralph-honest-ads-demo.up.railway.app/"
+    },
+    {
+      "zone": "shop",
+      "type": "shop",
+      "title": "The ralph shop",
+      "image": null,
+      "excerpt": "Print, merch and curios from the ralph.world store.",
+      "url": "https://ralph-world-production.up.railway.app/shop"
+    }
+  ]
+}
