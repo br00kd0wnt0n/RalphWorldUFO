@@ -985,17 +985,18 @@ function updateTheatreAudio(ufoWorld) {
 // ---- load content.json and assemble everything ----
 (async function loadContent() {
   let data = null;
-  // Prefer the live content.json when served over http(s)…
-  try {
-    const r = await fetch('content.json', { cache: 'no-store' });
-    if (r.ok) data = await r.json();
-  } catch (e) { /* file:// blocks local fetch — fall back to the inline copy */ }
-  // …otherwise use the snapshot embedded in this file (works when opened directly).
+  // 1) live DB-backed API, 2) static snapshot file, 3) inline copy (file://).
+  for (const url of ['/api/content', 'content.json']) {
+    try {
+      const r = await fetch(url, { cache: 'no-store' });
+      if (r.ok) { data = await r.json(); break; }
+    } catch (e) { /* fall through */ }
+  }
   if (!data) {
     const el = document.getElementById('ralph-content');
     if (el) { try { data = JSON.parse(el.textContent); } catch (e) {} }
   }
-  if (!data) { console.warn('No content available (content.json + inline both missing).'); return; }
+  if (!data) { console.warn('No content available (api + content.json + inline all missing).'); return; }
 
   CONFIG.hlsUrl = data.hlsUrl || '';
   if (data.theatre) theatreObj = buildTheatre(data.theatre);
