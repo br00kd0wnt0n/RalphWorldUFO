@@ -111,6 +111,9 @@ const TYPES = {
   '.ico': 'image/x-icon', '.woff2': 'font/woff2', '.txt': 'text/plain; charset=utf-8',
 };
 
+// always revalidate HTML so browsers never run a stale (buggy) cached copy
+const cacheFor = (ext) => (ext === '.html') ? 'no-cache, must-revalidate' : 'public, max-age=300';
+
 function serveStatic(req, res, urlPath) {
   if (urlPath === '/' || urlPath === '') urlPath = '/index.html';
   const filePath = path.join(ROOT, path.normalize(urlPath));
@@ -119,11 +122,12 @@ function serveStatic(req, res, urlPath) {
     if (err || !stat.isFile()) {
       return fs.readFile(path.join(ROOT, 'index.html'), (e, data) => {
         if (e) { res.writeHead(404); return res.end('Not found'); }
-        res.writeHead(200, { 'Content-Type': TYPES['.html'] });
+        res.writeHead(200, { 'Content-Type': TYPES['.html'], 'Cache-Control': 'no-cache, must-revalidate' });
         res.end(data);
       });
     }
-    res.writeHead(200, { 'Content-Type': TYPES[path.extname(filePath).toLowerCase()] || 'application/octet-stream' });
+    const ext = path.extname(filePath).toLowerCase();
+    res.writeHead(200, { 'Content-Type': TYPES[ext] || 'application/octet-stream', 'Cache-Control': cacheFor(ext) });
     if (req.method === 'HEAD') return res.end();
     fs.createReadStream(filePath).pipe(res);
   });
