@@ -734,67 +734,6 @@ function updateHum(intensity) {
   }
 }
 
-// ---- Ambient space soundscape: a constant low bed + a tonal pad per zone that
-// fades in as the UFO passes over that zone. Kept well below the theatre level. ----
-function makeNoiseBuffer(ctx, seconds) {
-  const len = Math.floor(ctx.sampleRate * seconds);
-  const buf = ctx.createBuffer(1, len, ctx.sampleRate);
-  const d = buf.getChannelData(0);
-  for (let k = 0; k < len; k++) d[k] = Math.random() * 2 - 1;
-  return buf;
-}
-let ambMaster = null;
-const ambZones = [];
-const ZONE_CHORDS = {
-  tv:     [165, 247, 330],   // purple — electronic shimmer
-  lab:    [196, 294, 392],   // yellow — bright sci-fi
-  events: [147, 220, 294],   // teal — warm
-  mag:    [174, 261, 349],   // orange — open
-  shop:   [131, 196, 262],   // green — gentle
-};
-function initAmbient() {
-  if (ambMaster || !actx) return;
-  ambMaster = actx.createGain(); ambMaster.gain.value = 0;
-  ambMaster.connect(actx.destination);
-
-  // consistent space wash: looping filtered noise that slowly "breathes"
-  const noise = actx.createBufferSource(); noise.buffer = makeNoiseBuffer(actx, 4); noise.loop = true;
-  const nLP = actx.createBiquadFilter(); nLP.type = 'lowpass'; nLP.frequency.value = 300; nLP.Q.value = 0.5;
-  const nGain = actx.createGain(); nGain.gain.value = 0.05;
-  const nLFO = actx.createOscillator(); nLFO.type = 'sine'; nLFO.frequency.value = 0.05;
-  const nLFOg = actx.createGain(); nLFOg.gain.value = 110;
-  nLFO.connect(nLFOg); nLFOg.connect(nLP.frequency); nLFO.start();
-  noise.connect(nLP); nLP.connect(nGain); nGain.connect(ambMaster); noise.start();
-
-  // low constant drone for body
-  const drone = actx.createOscillator(); drone.type = 'sine'; drone.frequency.value = 55;
-  const dGain = actx.createGain(); dGain.gain.value = 0.04;
-  drone.connect(dGain); dGain.connect(ambMaster); drone.start();
-
-  // per-zone tonal pad (chord of soft sines with slow tremolo for variation)
-  for (const z of ZONES) {
-    const g = actx.createGain(); g.gain.value = 0;
-    const lp = actx.createBiquadFilter(); lp.type = 'lowpass'; lp.frequency.value = 800;
-    lp.connect(g); g.connect(ambMaster);
-    (ZONE_CHORDS[z.name] || [196, 294, 392]).forEach((f, i) => {
-      const o = actx.createOscillator(); o.type = 'sine'; o.frequency.value = f * (1 + i * 0.0015);
-      const og = actx.createGain(); og.gain.value = 0.5 / (i + 1);
-      const tl = actx.createOscillator(); tl.type = 'sine'; tl.frequency.value = 0.07 + i * 0.04;
-      const tg = actx.createGain(); tg.gain.value = 0.3;
-      tl.connect(tg); tg.connect(og.gain); tl.start();
-      o.connect(og); og.connect(lp); o.start();
-    });
-    ambZones.push({ gain: g, dir: z.dir });
-  }
-  ambMaster.gain.setTargetAtTime(0.16, actx.currentTime, 2.0);   // subtle fade-in, well under the theatre
-}
-function updateAmbient(localUp) {
-  if (!ambMaster) return;
-  for (const za of ambZones) {
-    const d = Math.max(0, localUp.dot(za.dir));     // 0..1 — closeness to this zone
-    za.gain.gain.setTargetAtTime(d * d * 0.45, actx.currentTime, 0.5);   // cross-fade between zones
-  }
-}
 
 // Tear the stream + audio down before the page goes away, so a reload doesn't
 // leave the old context/hls fetching and stacking another audio layer.
@@ -1328,7 +1267,6 @@ window.addEventListener('keydown', (e) => {
   // first interaction unlocks audio + starts the stream
   if (actx && actx.state === 'suspended') actx.resume();
   initHum();
-  initAmbient();
   if (streamReady && video.paused) video.play().catch(() => {});
 });
 window.addEventListener('keyup', (e) => {
@@ -1475,8 +1413,6 @@ function animate() {
   // UFO engine hum rises with movement
   updateHum(Math.abs(forwardSpeed) * 0.55 + Math.abs(turnSmoothed) * 0.35 + Math.abs(altVel) * 0.09);
 
-  // zone ambience cross-fades with the spot under the UFO
-  updateAmbient(localUp);
 
   // Particles update
   sparkMat.opacity = 1;
