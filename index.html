@@ -726,7 +726,7 @@ function initHum() {
 function updateHum(intensity) {
   if (!humMaster) return;
   const i = Math.min(1, intensity);
-  humMaster.gain.setTargetAtTime((0.18 + 0.82 * i) * 0.02, actx.currentTime, 0.15);  // faint idle, gentle swell
+  humMaster.gain.setTargetAtTime((0.18 + 0.82 * i) * 0.025, actx.currentTime, 0.15);  // faint idle, gentle swell
   humLFO.frequency.setTargetAtTime(1.8 + i * 1.3, actx.currentTime, 0.3);            // pulse a touch faster moving
   if (humCarrier) {
     humCarrier[0].frequency.setTargetAtTime(128 + i * 18, actx.currentTime, 0.3);
@@ -1002,11 +1002,11 @@ function updateTheatreAudio(ufoWorld) {
   if (!audioReady || !theatreObj) return;
   theatreObj.getWorldPosition(_audioTw);
   const dist = _audioTw.distanceTo(ufoWorld);
-  // fades in as you approach the screen, silent from across the planet
-  const near = 4, far = 30;
+  // quiet until you're genuinely near the screen, then swells to full
+  const near = 5, far = 36;
   let v = dist <= near ? 1 : dist >= far ? 0 : 1 - (dist - near) / (far - near);
-  v = v * v * v;                                              // steep ease — faint until close
-  audioGain.gain.setTargetAtTime(v * 0.9, actx.currentTime, 0.12);
+  v = v * v * v;                                              // steep ease — only loud up close
+  audioGain.gain.setTargetAtTime(v * 1.0, actx.currentTime, 0.12);
   // camera looks down -Z, so world +X is "screen right" → pan from the x offset
   const panX = (_audioTw.x - camera.position.x) / Math.max(10, dist);
   audioPan.pan.setTargetAtTime(Math.max(-1, Math.min(1, panX)), actx.currentTime, 0.12);
