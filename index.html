@@ -148,8 +148,7 @@
 <div id="loader">loading Ralph World</div>
 
 <div class="ribbon">
-  <span><span class="dot"></span>ralph one · transmission live</span>
-  <span class="right">orbit 001 · ★ ★ ★</span>
+  <span><span class="dot"></span>ralph.world explorer</span>
 </div>
 
 <div class="title" style="display:none">
@@ -705,6 +704,36 @@ let hls = null, videoTex = null, streamReady = false;
 let actx = null, audioGain = null, audioPan = null, audioReady = false, audioStream = null, audioAttaching = false;
 try { actx = new (window.AudioContext || window.webkitAudioContext)(); } catch (e) {}
 
+// ---- UFO engine hum: detuned oscillators → lowpass, gain/pitch follow movement ----
+let humGain = null, humOsc = [];
+function initHum() {
+  if (humGain || !actx) return;
+  const filter = actx.createBiquadFilter(); filter.type = 'lowpass'; filter.frequency.value = 720; filter.Q.value = 6;
+  humGain = actx.createGain(); humGain.gain.value = 0;
+  filter.connect(humGain); humGain.connect(actx.destination);
+  const specs = [
+    { f: 68,  type: 'sawtooth', g: 0.9 },
+    { f: 102, type: 'triangle', g: 0.7 },
+    { f: 214, type: 'sine',     g: 0.22 },  // faint high tone → "futuristic" shimmer
+  ];
+  for (const s of specs) {
+    const o = actx.createOscillator(); o.type = s.type; o.frequency.value = s.f;
+    const g = actx.createGain(); g.gain.value = s.g;
+    o.connect(g); g.connect(filter); o.start();
+    humOsc.push(o);
+  }
+}
+function updateHum(intensity) {
+  if (!humGain) return;
+  const i = Math.min(1, intensity);
+  humGain.gain.setTargetAtTime(i * 0.025, actx.currentTime, 0.09);         // subtle
+  if (humOsc.length === 3) {
+    humOsc[0].frequency.setTargetAtTime(68  + i * 34, actx.currentTime, 0.12);
+    humOsc[1].frequency.setTargetAtTime(102 + i * 50, actx.currentTime, 0.12);
+    humOsc[2].frequency.setTargetAtTime(214 + i * 130, actx.currentTime, 0.12);
+  }
+}
+
 // Tear the stream + audio down before the page goes away, so a reload doesn't
 // leave the old context/hls fetching and stacking another audio layer.
 function teardownAV() {
@@ -1002,61 +1031,26 @@ function updateTheatreAudio(ufoWorld) {
   if (data.theatre) theatreObj = buildTheatre(data.theatre);
   (data.items || []).forEach(buildPickup);
   if (CONFIG.hlsUrl) initStream(CONFIG.hlsUrl);
+  spawnInEmptySpot();   // rotate the planet so the UFO starts over open ground
 })();
 
-// ---------- Flat sticker satellites floating in the void ----------
-// (Ralph's "flat illustration on black" motif — they're sprites, not 3D)
-function makeStickerSprite(svgString) {
-  const blob = new Blob([svgString], { type: 'image/svg+xml' });
-  const url = URL.createObjectURL(blob);
-  const tex = new THREE.TextureLoader().load(url);
-  tex.colorSpace = THREE.SRGBColorSpace;
-  const mat = new THREE.SpriteMaterial({ map: tex, transparent: true, fog: false });
-  return new THREE.Sprite(mat);
-}
-
-const STICKERS = [
-  // tiny saucer
-  `<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 60'>
-     <ellipse cx='50' cy='35' rx='40' ry='10' fill='#ea128b' stroke='#000' stroke-width='3'/>
-     <ellipse cx='50' cy='30' rx='22' ry='12' fill='#fbc000' stroke='#000' stroke-width='3'/>
-     <circle cx='42' cy='28' r='3' fill='#000'/>
-     <circle cx='50' cy='27' r='3' fill='#000'/>
-     <circle cx='58' cy='28' r='3' fill='#000'/>
-   </svg>`,
-  // satellite
-  `<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 60'>
-     <rect x='10' y='22' width='20' height='16' fill='#7b3fe4' stroke='#000' stroke-width='3'/>
-     <rect x='70' y='22' width='20' height='16' fill='#7b3fe4' stroke='#000' stroke-width='3'/>
-     <rect x='40' y='20' width='20' height='20' fill='#5fbcbf' stroke='#000' stroke-width='3'/>
-     <circle cx='50' cy='30' r='5' fill='#fbc000' stroke='#000' stroke-width='2'/>
-   </svg>`,
-  // rocket
-  `<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 60 100'>
-     <ellipse cx='30' cy='40' rx='14' ry='28' fill='#ee6626' stroke='#000' stroke-width='3'/>
-     <circle cx='30' cy='30' r='6' fill='#5fbcbf' stroke='#000' stroke-width='2'/>
-     <polygon points='16,55 6,75 22,65' fill='#ea128b' stroke='#000' stroke-width='3'/>
-     <polygon points='44,55 54,75 38,65' fill='#ea128b' stroke='#000' stroke-width='3'/>
-     <path d='M 25 70 Q 30 95 35 70' fill='#fbc000' stroke='#000' stroke-width='2'/>
-   </svg>`,
-  // star
-  `<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 60 60'>
-     <polygon points='30,4 36,24 56,24 40,36 46,56 30,44 14,56 20,36 4,24 24,24' fill='#fbc000' stroke='#000' stroke-width='3'/>
-   </svg>`,
-];
-
-const stickers = [];
-for (let i = 0; i < 9; i++) {
-  const sp = makeStickerSprite(STICKERS[i % STICKERS.length]);
-  const r = 80 + Math.random() * 60;
-  const a = (i / 9) * Math.PI * 2 + Math.random() * 0.4;
-  const h = (Math.random() - 0.5) * 60;
-  sp.position.set(Math.cos(a) * r, h, Math.sin(a) * r);
-  const s = 8 + Math.random() * 8;
-  sp.scale.set(s, s * 0.6, 1);
-  sp.userData = { angle: a, radius: r, height: h, drift: 0.04 + Math.random() * 0.05, bob: Math.random() * Math.PI * 2 };
-  scene.add(sp);
-  stickers.push(sp);
+// Orient the planet so the point under the UFO at spawn is far from every
+// discovery + the theatre (no overlay popping open on load).
+function spawnInEmptySpot() {
+  const occupied = [];
+  if (theatreDir) occupied.push(theatreDir.clone());
+  for (const d of discoverables) occupied.push(d.position.clone().normalize());
+  if (!occupied.length) return;
+  let best = null, bestScore = Infinity;          // minimise the nearest occupied (max gap)
+  const N = 300, golden = Math.PI * (3 - Math.sqrt(5));
+  for (let i = 0; i < N; i++) {
+    const y = 1 - (i / (N - 1)) * 2, ra = Math.sqrt(1 - y * y), th = golden * i;
+    const c = new THREE.Vector3(Math.cos(th) * ra, y, Math.sin(th) * ra);
+    let nearest = -1;                              // highest dot = closest occupied dir
+    for (const o of occupied) { const dot = c.dot(o); if (dot > nearest) nearest = dot; }
+    if (nearest < bestScore) { bestScore = nearest; best = c; }
+  }
+  if (best) planetGroup.quaternion.setFromUnitVectors(best, new THREE.Vector3(0, 1, 0));
 }
 
 // ---------- UFO ----------
@@ -1194,7 +1188,7 @@ for (let i = 0; i < NPC_COUNT; i++) {
     dome: pick(NPC_DOMES),
     pilot: pick([RALPH.green, RALPH.pink, RALPH.yellow]),
     light: pick(PALETTE), light2: pick(PALETTE),
-    beam: Math.random() < 0.5,
+    beam: false,
   });
   s.scale.setScalar(0.55 + Math.random() * 0.25);   // a bit smaller than the player
 
@@ -1271,6 +1265,7 @@ window.addEventListener('keydown', (e) => {
   if (e.code === 'Space') e.preventDefault();
   // first interaction unlocks audio + starts the stream
   if (actx && actx.state === 'suspended') actx.resume();
+  initHum();
   if (streamReady && video.paused) video.play().catch(() => {});
 });
 window.addEventListener('keyup', (e) => {
@@ -1414,6 +1409,9 @@ function animate() {
   // other UFOs exploring the planet
   updateNpcs(t);
 
+  // UFO engine hum rises with movement
+  updateHum(Math.abs(forwardSpeed) * 0.55 + Math.abs(turnSmoothed) * 0.35 + Math.abs(altVel) * 0.09);
+
   // Particles update
   sparkMat.opacity = 1;
   for (let i = 0; i < SPARK_MAX; i++) {
@@ -1432,15 +1430,6 @@ function animate() {
   }
   sparkGeo.attributes.position.needsUpdate = true;
   sparkGeo.attributes.color.needsUpdate = true;
-
-  // Stickers slow drift
-  stickers.forEach((sp) => {
-    sp.userData.angle += dt * sp.userData.drift;
-    const r = sp.userData.radius;
-    sp.position.x = Math.cos(sp.userData.angle) * r;
-    sp.position.z = Math.sin(sp.userData.angle) * r;
-    sp.position.y = sp.userData.height + Math.sin(t * 0.5 + sp.userData.bob) * 3;
-  });
 
   // Camera: fixed behind the upright UFO
   const desired = new THREE.Vector3(0, ufo.position.y + 2.4, 7.4);
